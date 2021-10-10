@@ -21,7 +21,12 @@
 }
 
 .card-header{
-    height: 80px;
+    height: 90px;
+    padding: 5px;
+}
+
+h4 {
+    margin-bottom: 10px;
 }
 .cardMain{
     margin: 2rem 2rem;
