@@ -1,4 +1,5 @@
-
+const generateIndex = (team) => {
+return `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,18 +18,21 @@
     <section class="employeeInfo">
         <div class="card bg-primary mb-3 cardMain" style="max-width: 18rem;">
             <div class="card-header">
-                <h3>Sam</h3>
+                <h3>${team[0].name}</h3>
                 <h4>Manager</h4>
             </div>
             <div class="card-body bg-light">
                 <div class="card cardInner" style="width: 16rem;">
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item">ID: 9</li>
-                      <li class="list-group-item">Email: cianfich@gmail.com</li>
-                      <li class="list-group-item">Office Number: 0</li>
+                      <li class="list-group-item">ID: ${team[0].id}</li>
+                      <li class="list-group-item">Email: ${team[0].email}</li>
+                      <li class="list-group-item">Office Number: ${team[0].officeNumber}</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>  
-  </body>
+  </body>`
+  }
+
+  module.exports = generateIndex;

@@ -1,10 +1,11 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generateIndex = require('./src/helperCode');
 
 let team = [];
 
 const getTeamInfo = () => {
-    inquirer.prompt([
+    return inquirer.prompt([
       {
         type: 'input',
         name: 'name',
@@ -44,8 +45,8 @@ const getTeamInfo = () => {
         } else if (data.continue1 === "Add an Intern."){
             getInternInfo();
         } else {
-            console.log ("Congratulations! Your team has been created.");
-        };
+            return;
+        }
     });
 }
 
@@ -85,7 +86,7 @@ const getEngineerInfo = () => {
         } else if (data.continue1 === "Add an Intern."){
             getInternInfo();
         } else {
-            console.log ("Congratulations! Your team has been created.");
+            return;
         };
     });
 }
@@ -126,12 +127,20 @@ const getInternInfo = () => {
         } else if (data.continue1 === "Add an Intern."){
             getInternInfo();
         } else {
-            console.log ("Congratulations! Your team has been created.");
+            return;
         };
     });
 }
+const writeToFile = () => {
+    fs.writeFile('index.html', generateIndex(team), (err) =>
+    err ? console.error(err) : console.log("Congratulations! Your team has been created.")
+  );
+   
+};
+
 const init = () => {
-    getTeamInfo();      
+    getTeamInfo()
+        .then((team) => {writeToFile(team)})   
 };
 
 //Initialize app
