@@ -27,7 +27,7 @@ describe ("Manager", () => {
     describe("getRole()", () => {
         it("should return the value 'Manager' which was returned from the function", () => {
             const role = "Manager"
-            const testManager = new Manager ("Jim", 5678, "jimtest@gmail.com")
+            const testManager = new Manager ("Jim", 5678, "jimtest@gmail.com", 121)
             expect(testManager.getRole()).toBe(role)
         });
     });
