@@ -7,9 +7,9 @@ describe ("Employee", () => {
             const id = 1234;
             const email = "cianfich@gmail.com";
             const testEmployee = new Employee (name, id, email);
-            expect(testEmployee.name).toBe("Rachel");
-            expect(testEmployee.id).toBe(1234);
-            expect(testEmployee.email).toBe("cianfich@gmail.com");
+            expect(testEmployee.name).toBe(name);
+            expect(testEmployee.id).toBe(id);
+            expect(testEmployee.email).toBe(email);
         });
     });
     describe("getName()", () => {
