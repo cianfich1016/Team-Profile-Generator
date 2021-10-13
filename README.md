@@ -18,6 +18,12 @@
   ## Usage
   Run the index.js file from the terminal using node. Type "node index.js" into the terminal and see automated questions appear. Type answers or choose answers, and view your team displayed on a generated index.html page in the "dist" directory.
 
+  View a tutorial video [here.](https://watch.screencastify.com/v/mESxCd8TtQ4NluRDfHtg)
+
+  ![Final render of team](./images/FinalRender.png)
+
+
+
   ## Tests
   Ensure the "jest" package is installed. Navigate to the "test" directory. Run tests for all js files by entering "npm run test" in the console.
 
