@@ -1,8 +1,11 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateIndex = require('./src/helperCode');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
 
 let team = [];
+
 
 const getTeamInfo = () => {
     return inquirer.prompt([
@@ -33,19 +36,30 @@ const getTeamInfo = () => {
       },
       {
         type: 'list',
-        name: 'continue1',
+        name: 'continue',
         message: "What would you like to do next?",
         choices: ["Add an Engineer.", "Add an Intern.", "Finish building my team."]
       },
     ])
     .then((data) => {
-        team.push(data);
-        if (data.continue1 === "Add an Engineer."){
+        const newManager = new Manager(data.name, data.id, data.email, data.officeNumber)
+        team.push(newManager)
+        if (data.continue === "Add an Engineer."){
             getEngineerInfo();
-        } else if (data.continue1 === "Add an Intern."){
+        } else if (data.continue === "Add an Intern."){
             getInternInfo();
         } else {
-            return;
+          console.log("Congratulations! Your team has been created. Find the 'index.html' file in the 'dist' directory.")
+          let pageHTML = fs.readFileSync("./src/page.html"); 
+          for (var i = 0; i < team.length; i++) {
+              var managerHTML = fs.readFileSync("./src/manager.html", "utf-8")
+              managerHTML = managerHTML.replace('{{name}}', team[i].name);
+              managerHTML = managerHTML.replace('{{id}}', team[i].id);
+              managerHTML = managerHTML.replace('{{email}}', team[i].email);
+              managerHTML = managerHTML.replace('{{officeNumber}}', team[i].officeNumber);
+              pageHTML += managerHTML;
+              fs.writeFileSync("./dist/index.html", pageHTML);
+            };
         }
     });
 }
@@ -69,26 +83,55 @@ const getEngineerInfo = () => {
       },
       {
         type: 'input',
-        name: 'github',
+        name: 'gitHub',
         message: "What is his/her GitHub username?",
       },
       {
         type: 'list',
-        name: 'continue2',
+        name: 'continue',
         message: "What would you like to do next?",
         choices: ["Add an Engineer.", "Add an Intern.", "Finish building my team."]
       },
     ])
     .then((data) => {
-        team.push(data);
-        if (data.continue1 === "Add an Engineer."){
+      let newEngineer = new Engineer(data.name, data.id, data.email, data.gitHub)
+        team.push(newEngineer);
+        if (data.continue === "Add an Engineer."){
             getEngineerInfo();
-        } else if (data.continue1 === "Add an Intern."){
+        } else if (data.continue === "Add an Intern."){
             getInternInfo();
         } else {
-            return;
+          console.log("Congratulations! Your team has been created. Find the 'index.html' file in the 'dist' directory.")
+          let pageHTML = fs.readFileSync("./src/page.html"); 
+          for (var i = 0; i < team.length; i++) {
+            if (team[i].getRole()=== 'Manager'){
+              var managerHTML = fs.readFileSync("./src/manager.html", "utf-8")
+              managerHTML = managerHTML.replace('{{name}}', team[i].name);
+              managerHTML = managerHTML.replace('{{id}}', team[i].id);
+              managerHTML = managerHTML.replace('{{email}}', team[i].email);
+              managerHTML = managerHTML.replace('{{officeNumber}}', team[i].officeNumber);
+              pageHTML += managerHTML;
+              fs.writeFileSync("./dist/index.html", pageHTML);
+            } else if (team[i].getRole()=== 'Engineer'){
+                var engineerHTML = fs.readFileSync("./src/engineer.html", "utf-8")
+                engineerHTML = engineerHTML.replace('{{name}}', team[i].name);
+                engineerHTML = engineerHTML.replace('{{id}}', team[i].id);
+                engineerHTML = engineerHTML.replace('{{email}}', team[i].email);
+                engineerHTML = engineerHTML.replace('{{gitHub}}', team[i].gitHub);
+                pageHTML += engineerHTML;
+                fs.writeFileSync("./dist/index.html", pageHTML);
+            } else if (team[i].getRole()=== 'Intern'){
+                var internHTML = fs.readFileSync("./src/intern.html", "utf-8")
+                internHTML = internHTML.replace('{{name}}', team[i].name);
+                internHTML = internHTML.replace('{{id}}', team[i].id);
+                internHTML = internHTML.replace('{{email}}', team[i].email);
+                internHTML = internHTML.replace('{{school}}', team[i].school);
+                pageHTML += internHTML;
+                fs.writeFileSync("./dist/index.html", pageHTML);
         };
-    });
+      }
+    }
+  });
 }
 
 const getInternInfo = () => {
@@ -110,38 +153,70 @@ const getInternInfo = () => {
       },
       {
         type: 'input',
-        name: 'github',
+        name: 'school',
         message: "What school is he/she attending?",
       },
       {
         type: 'list',
-        name: 'continue3',
+        name: 'continue',
         message: "What would you like to do next?",
         choices: ["Add an Engineer.", "Add an Intern.", "Finish building my team."]
       },
     ])
     .then((data) => {
-        team.push(data);
-        if (data.continue1 === "Add an Engineer."){
+      let newIntern = new Intern(data.name, data.id, data.email, data.school)
+        team.push(newIntern);
+        if (data.continue === "Add an Engineer."){
             getEngineerInfo();
-        } else if (data.continue1 === "Add an Intern."){
+        } else if (data.continue === "Add an Intern."){
             getInternInfo();
         } else {
-            return;
+          console.log("Congratulations! Your team has been created. Find the 'index.html' file in the 'dist' directory.")
+          let pageHTML = fs.readFileSync("./src/page.html"); 
+          for (var i = 0; i < team.length; i++) {
+            if (team[i].getRole()=== 'Manager'){
+              var managerHTML = fs.readFileSync("./src/manager.html", "utf-8")
+              managerHTML = managerHTML.replace('{{name}}', team[i].name);
+              managerHTML = managerHTML.replace('{{id}}', team[i].id);
+              managerHTML = managerHTML.replace('{{email}}', team[i].email);
+              managerHTML = managerHTML.replace('{{officeNumber}}', team[i].officeNumber);
+              pageHTML += managerHTML;
+              fs.writeFileSync("./dist/index.html", pageHTML);
+            } else if (team[i].getRole()=== 'Engineer'){
+                var engineerHTML = fs.readFileSync("./src/engineer.html", "utf-8")
+                engineerHTML = engineerHTML.replace('{{name}}', team[i].name);
+                engineerHTML = engineerHTML.replace('{{id}}', team[i].id);
+                engineerHTML = engineerHTML.replace('{{email}}', team[i].email);
+                engineerHTML = engineerHTML.replace('{{gitHub}}', team[i].gitHub);
+                pageHTML += engineerHTML;
+                fs.writeFileSync("./dist/index.html", pageHTML);
+            } else if (team[i].getRole()=== 'Intern'){
+                var internHTML = fs.readFileSync("./src/intern.html", "utf-8")
+                internHTML = internHTML.replace('{{name}}', team[i].name);
+                internHTML = internHTML.replace('{{id}}', team[i].id);
+                internHTML = internHTML.replace('{{email}}', team[i].email);
+                internHTML = internHTML.replace('{{school}}', team[i].school);
+                pageHTML += internHTML;
+                fs.writeFileSync("./dist/index.html", pageHTML);
+            };
+          }
         };
     });
 }
-const writeToFile = () => {
-    fs.writeFile('index.html', generateIndex(team), (err) =>
-    err ? console.error(err) : console.log("Congratulations! Your team has been created.")
-  );
-   
-};
 
 const init = () => {
-    getTeamInfo()
-        .then((team) => {writeToFile(team)})   
+    getTeamInfo()  
 };
 
 //Initialize app
 init();
+
+ 
+
+
+
+
+
+  
+
+
