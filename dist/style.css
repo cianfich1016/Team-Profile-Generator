@@ -29,8 +29,12 @@
 h3, h4 {
     padding-left: 10px;
 }
+h3{
+    font-size: 220%;
+}
 h4 {
     margin-bottom: 10px;
+    font-size: 140%;
 }
 .cardMain{
     margin: 2rem 2rem;
