@@ -1,4 +1,4 @@
-<!--Engineer card html-->
+
     <div class="card bg-primary mb-3 cardMain" style="max-width: 18rem;">
         <div class="card-header">
             <h3>{{name}}</h3>
@@ -8,8 +8,8 @@
             <div class="card cardInner" style="width: 16rem;">
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">ID: {{id}}</li>
-                  <li class="list-group-item">Email Address: <a href="mailto:{{ email }}">{{{email}}</a></li>
-                  <li class="list-group-item">GitHub Username: <a href="https://github.com/{{ github }}" target="_blank">{{gitHub}}</a></li>
+                  <li class="list-group-item">Email Address: <a href="mailto:{{link email}}">{{email}}</a></li>
+                  <li class="list-group-item">GitHub Username: <a href="https://github.com/{{ gitHub link }}" target="_blank">{{gitHub}}</a></li>
                 </ul>
             </div>
         </div>

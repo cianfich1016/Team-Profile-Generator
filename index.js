@@ -55,6 +55,7 @@ const getTeamInfo = () => {
               let managerHTML = fs.readFileSync("./src/manager.html", "utf-8")
               managerHTML = managerHTML.replace('{{name}}', team[i].name);
               managerHTML = managerHTML.replace('{{id}}', team[i].id);
+              managerHTML = managerHTML.replace('{{link email}}', team[i].email);
               managerHTML = managerHTML.replace('{{email}}', team[i].email);
               managerHTML = managerHTML.replace('{{officeNumber}}', team[i].officeNumber);
               pageHTML = pageHTML.replace('{{team}}', managerHTML);
@@ -108,6 +109,7 @@ const getEngineerInfo = () => {
               var managerHTML = fs.readFileSync("./src/manager.html", "utf-8")
               managerHTML = managerHTML.replace('{{name}}', team[i].name);
               managerHTML = managerHTML.replace('{{id}}', team[i].id);
+              managerHTML = managerHTML.replace('{{link email}}', team[i].email);
               managerHTML = managerHTML.replace('{{email}}', team[i].email);
               managerHTML = managerHTML.replace('{{officeNumber}}', team[i].officeNumber);
               pageHTML += pageHTML.replace('{{team}}', managerHTML);
@@ -116,7 +118,9 @@ const getEngineerInfo = () => {
                 var engineerHTML = fs.readFileSync("./src/engineer.html", "utf-8")
                 engineerHTML = engineerHTML.replace('{{name}}', team[i].name);
                 engineerHTML = engineerHTML.replace('{{id}}', team[i].id);
+                engineerHTML = managerHTML.replace('{{link email}}', team[i].email);
                 engineerHTML = engineerHTML.replace('{{email}}', team[i].email);
+                engineerHTML = engineerHTML.replace('{{gitHub link}}', team[i].gitHub)
                 engineerHTML = engineerHTML.replace('{{gitHub}}', team[i].gitHub);
                 pageHTML += pageHTML.replace('{{team}}', engineerHTML);
           
@@ -124,6 +128,7 @@ const getEngineerInfo = () => {
                 var internHTML = fs.readFileSync("./src/intern.html", "utf-8")
                 internHTML = internHTML.replace('{{name}}', team[i].name);
                 internHTML = internHTML.replace('{{id}}', team[i].id);
+                internHTML = managerHTML.replace('{{link email}}', team[i].email);
                 internHTML = internHTML.replace('{{email}}', team[i].email);
                 internHTML = internHTML.replace('{{school}}', team[i].school);
                 pageHTML += internHTML;
@@ -178,6 +183,7 @@ const getInternInfo = () => {
               var managerHTML = fs.readFileSync("./src/manager.html", "utf-8")
               managerHTML = managerHTML.replace('{{name}}', team[i].name);
               managerHTML = managerHTML.replace('{{id}}', team[i].id);
+              managerHTML = managerHTML.replace('{{link email}}', team[i].email);
               managerHTML = managerHTML.replace('{{email}}', team[i].email);
               managerHTML = managerHTML.replace('{{officeNumber}}', team[i].officeNumber);
               pageHTML += managerHTML;
@@ -186,7 +192,9 @@ const getInternInfo = () => {
                 var engineerHTML = fs.readFileSync("./src/engineer.html", "utf-8")
                 engineerHTML = engineerHTML.replace('{{name}}', team[i].name);
                 engineerHTML = engineerHTML.replace('{{id}}', team[i].id);
+                engineerHTML = managerHTML.replace('{{link email}}', team[i].email);
                 engineerHTML = engineerHTML.replace('{{email}}', team[i].email);
+                engineerHTML = engineerHTML.replace('{{gitHub link}}', team[i].gitHub)
                 engineerHTML = engineerHTML.replace('{{gitHub}}', team[i].gitHub);
                 pageHTML += engineerHTML;
                 fs.writeFileSync("./dist/index.html", pageHTML);
@@ -194,6 +202,7 @@ const getInternInfo = () => {
                 var internHTML = fs.readFileSync("./src/intern.html", "utf-8")
                 internHTML = internHTML.replace('{{name}}', team[i].name);
                 internHTML = internHTML.replace('{{id}}', team[i].id);
+                internHTML = managerHTML.replace('{{link email}}', team[i].email);
                 internHTML = internHTML.replace('{{email}}', team[i].email);
                 internHTML = internHTML.replace('{{school}}', team[i].school);
                 pageHTML += internHTML;
