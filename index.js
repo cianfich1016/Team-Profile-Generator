@@ -189,7 +189,7 @@ const getEngineerInfo = () => {
           }
         }
         //Outside of for loop once all has been written to cards array, replace the team template with the data from cards array to equal pageHTML and write that.
-        pageHTML = pageHTML.replace("{{team}}", cards);
+        pageHTML = pageHTML.replace("{{team}}", cards.join(''));
         fs.writeFileSync("./dist/index.html", pageHTML);
       }
     });
@@ -290,7 +290,7 @@ const getInternInfo = () => {
           }
         }
         //Outside of for loop once all has been written to cards array, replace the team template with the data from cards array to equal pageHTML and write that.
-        pageHTML = pageHTML.replace("{{team}}", cards);
+        pageHTML = pageHTML.replace("{{team}}", cards.join(''));
         fs.writeFileSync("./dist/index.html", pageHTML);
       }
     });
