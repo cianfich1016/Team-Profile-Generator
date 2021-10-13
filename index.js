@@ -1,13 +1,17 @@
+//Import all package and class needed
 const inquirer = require("inquirer");
 const fs = require("fs");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
+//Declare two empty arrays that will be added to during the adding of employees
 let team = [];
 let cards = [];
 
+//Start with getting only manager info
 const getTeamInfo = () => {
+  //Add questions to determine information about manager
   return inquirer
     .prompt([
       {
@@ -47,6 +51,7 @@ const getTeamInfo = () => {
         ],
       },
     ])
+    //Create new manager object
     .then((data) => {
       const newManager = new Manager(
         data.name,
@@ -54,7 +59,9 @@ const getTeamInfo = () => {
         data.email,
         data.officeNumber
       );
+      //Add new manager object created to the team array
       team.push(newManager);
+      //Depending on what the user choices either continue on to get specific information for the employee or exit and print to html.
       if (data.continue === "Add an Engineer.") {
         getEngineerInfo();
       } else if (data.continue === "Add an Intern.") {
@@ -63,6 +70,7 @@ const getTeamInfo = () => {
         console.log(
           "Congratulations! Your team has been created. Find the 'index.html' file in the 'dist' directory."
         );
+        //Read main html page and loop through team array to replace template with information givin in inquirer prompt
         let pageHTML = fs.readFileSync("./src/page.html", "utf-8");
         for (var i = 0; i < team.length; i++) {
           let managerHTML = fs.readFileSync("./src/manager.html", "utf-8");
@@ -74,6 +82,7 @@ const getTeamInfo = () => {
             "{{officeNumber}}",
             team[i].officeNumber
           );
+          //Replace entire card of manager info with team template on main page html and write to file.
           pageHTML = pageHTML.replace("{{team}}", managerHTML);
           fs.writeFileSync("./dist/index.html", pageHTML);
         }
