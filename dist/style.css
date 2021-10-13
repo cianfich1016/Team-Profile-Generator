@@ -13,7 +13,7 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     
 }
-
+/* Styling for cards */
 .employeeInfo{
     display: flex;
     flex-wrap: wrap;
