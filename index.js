@@ -89,8 +89,9 @@ const getTeamInfo = () => {
       }
     });
 };
-
+//Get info for Engineer employee
 const getEngineerInfo = () => {
+  //Questions asking for input to store to variables
   inquirer
     .prompt([
       {
@@ -124,6 +125,7 @@ const getEngineerInfo = () => {
         ],
       },
     ])
+    //Create new Engineer object
     .then((data) => {
       let newEngineer = new Engineer(
         data.name,
@@ -131,7 +133,9 @@ const getEngineerInfo = () => {
         data.email,
         data.gitHub
       );
+      //Push to team array
       team.push(newEngineer);
+      //Ask what user would like to do next
       if (data.continue === "Add an Engineer.") {
         getEngineerInfo();
       } else if (data.continue === "Add an Intern.") {
@@ -140,7 +144,9 @@ const getEngineerInfo = () => {
         console.log(
           "Congratulations! Your team has been created. Find the 'index.html' file in the 'dist' directory."
         );
+        //Read main file to append to main page.
         let pageHTML = fs.readFileSync("./src/page.html", "utf-8");
+        //Loop through all objects in team array and if role is Manager then replace templates with certain variables
         for (var i = 0; i < team.length; i++) {
           if (team[i].getRole() === "Manager") {
             var managerHTML = fs.readFileSync("./src/manager.html", "utf-8");
@@ -152,7 +158,9 @@ const getEngineerInfo = () => {
               "{{officeNumber}}",
               team[i].officeNumber
             );
+            //Push this specific card to a full array of cards that will eventually print.
             cards.push(managerHTML);
+            //If role is Engineer then replace templates in engineer.html.
           } else if (team[i].getRole() === "Engineer") {
             var engineerHTML = fs.readFileSync("./src/engineer.html", "utf-8");
             engineerHTML = engineerHTML.replace("{{name}}", team[i].name);
@@ -167,6 +175,7 @@ const getEngineerInfo = () => {
               team[i].gitHub
             );
             engineerHTML = engineerHTML.replace("{{gitHub}}", team[i].gitHub);
+            //Push that html to cards array.
             cards.push(engineerHTML);
           } else if (team[i].getRole() === "Intern") {
             var internHTML = fs.readFileSync("./src/intern.html", "utf-8");
@@ -175,16 +184,19 @@ const getEngineerInfo = () => {
             internHTML = internHTML.replace("{{link email}}", team[i].email);
             internHTML = internHTML.replace("{{email}}", team[i].email);
             internHTML = internHTML.replace("{{school}}", team[i].school);
+            //Push internhtml to cards array
             cards.push(internHTML);
           }
         }
+        //Outside of for loop once all has been written to cards array, replace the team template with the data from cards array to equal pageHTML and write that.
         pageHTML = pageHTML.replace("{{team}}", cards);
         fs.writeFileSync("./dist/index.html", pageHTML);
       }
     });
 };
-
+//Get info for Intern employee
 const getInternInfo = () => {
+  //Questions asking for input to store to variables
   inquirer
     .prompt([
       {
@@ -218,9 +230,12 @@ const getInternInfo = () => {
         ],
       },
     ])
+    //Create new Intern object
     .then((data) => {
       let newIntern = new Intern(data.name, data.id, data.email, data.school);
+      //Push to team array
       team.push(newIntern);
+      //Ask what user would like to do next
       if (data.continue === "Add an Engineer.") {
         getEngineerInfo();
       } else if (data.continue === "Add an Intern.") {
@@ -229,8 +244,10 @@ const getInternInfo = () => {
         console.log(
           "Congratulations! Your team has been created. Find the 'index.html' file in the 'dist' directory."
         );
+        //Read main file to append to main page.
         let pageHTML = fs.readFileSync("./src/page.html", "utf-8");
         for (var i = 0; i < team.length; i++) {
+          //Loop through all objects in team array and if role is Manager then replace templates with certain variables created from input
           if (team[i].getRole() === "Manager") {
             var managerHTML = fs.readFileSync("./src/manager.html", "utf-8");
             managerHTML = managerHTML.replace("{{name}}", team[i].name);
@@ -241,8 +258,10 @@ const getInternInfo = () => {
               "{{officeNumber}}",
               team[i].officeNumber
             );
-            pageHTML += managerHTML;
+            //Push managerHTML to cards array
+            cards.push(managerHTML);
           } else if (team[i].getRole() === "Engineer") {
+            //Loop through all objects in team array and if role is Engineer then replace templates with certain variables created from input
             var engineerHTML = fs.readFileSync("./src/engineer.html", "utf-8");
             engineerHTML = engineerHTML.replace("{{name}}", team[i].name);
             engineerHTML = engineerHTML.replace("{{id}}", team[i].id);
@@ -256,7 +275,9 @@ const getInternInfo = () => {
               team[i].gitHub
             );
             engineerHTML = engineerHTML.replace("{{gitHub}}", team[i].gitHub);
-            pageHTML += engineerHTML;
+            //Push engineerHTML to cards array
+            cards.push(engineerHTML);
+            //Loop through all objects in team array and if role is Engineer then replace templates with certain variables created from input
           } else if (team[i].getRole() === "Intern") {
             var internHTML = fs.readFileSync("./src/intern.html", "utf-8");
             internHTML = internHTML.replace("{{name}}", team[i].name);
@@ -264,18 +285,20 @@ const getInternInfo = () => {
             internHTML = internHTML.replace("{{link email}}", team[i].email);
             internHTML = internHTML.replace("{{email}}", team[i].email);
             internHTML = internHTML.replace("{{school}}", team[i].school);
-            pageHTML += internHTML;
+            //Push internHTML to cards array
+            cards.push(internHTML);
           }
         }
+        //Outside of for loop once all has been written to cards array, replace the team template with the data from cards array to equal pageHTML and write that.
         pageHTML = pageHTML.replace("{{team}}", cards);
         fs.writeFileSync("./dist/index.html", pageHTML);
       }
     });
 };
-
+//Declaring start of application function
 const init = () => {
   getTeamInfo();
 };
 
-//Initialize app
+//Initialize application
 init();
