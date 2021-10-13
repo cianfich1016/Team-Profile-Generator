@@ -1,6 +1,9 @@
+//Require import of Engineer class
 const Engineer = require ("../lib/Engineer");
 
+//Test Engineer class
 describe ("Engineer", () => {
+    //Test creation of constructor and parameters as extension of Employee class
     describe("constructor", () =>{
         it("should create an object as an extension of the 'Employee' class and set 3 parameters of 'name', 'id', and 'email' in that order as well as an GitHub username parameter", () => {
             const name = "Sam";
@@ -14,7 +17,7 @@ describe ("Engineer", () => {
             expect(testEngineer.gitHub).toBe(gitHub);
         });
     });
-
+    //Test getGitHub() method
     describe("getGitHub()", () => {
         it("should return the value of what was stored in the 'gitHub' parameter", () => {
             const gitHub = "test1016"
@@ -22,6 +25,7 @@ describe ("Engineer", () => {
             expect(testEngineer.getGitHub()).toBe(gitHub)
         });
     });
+    //Test geRole() method
     describe("getRole()", () => {
         it("should return the value 'Engineer' which was returned from the function", () => {
             const role = "Engineer"

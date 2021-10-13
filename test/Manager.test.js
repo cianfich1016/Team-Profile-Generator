@@ -1,6 +1,8 @@
+//Require import of Manager class
 const Manager = require ("../lib/Manager");
 
 describe ("Manager", () => {
+    //Test creation of constructor and parameters as extension of Employee class
     describe("constructor", () =>{
         it("should create an object as an extension of the 'Employee' class and set 3 parameters of 'name', 'id', and 'email' in that order as well as an officeNumber parameter", () => {
             const name = "Jim";
@@ -14,7 +16,7 @@ describe ("Manager", () => {
             expect(testManager.officeNumber).toBe(officeNumber);
         });
     });
-
+    //Test getOfficeNumber() method
     describe("getOfficeNumber()", () => {
         it("should return the value of what was stored in the 'officeNumber' parameter", () => {
             const officeNumber = 121
@@ -22,6 +24,7 @@ describe ("Manager", () => {
             expect(testManager.getOfficeNumber()).toBe(officeNumber)
         });
     });
+    //Test getRole() method
     describe("getRole()", () => {
         it("should return the value 'Manager' which was returned from the function", () => {
             const role = "Manager"

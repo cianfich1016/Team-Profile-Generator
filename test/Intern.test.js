@@ -1,6 +1,8 @@
+//Require import of Intern class
 const Intern = require ("../lib/Intern");
 
 describe ("Intern", () => {
+    //Test creation of constructor and parameters as extension of Employee class
     describe("constructor", () =>{
         it("should create an object as an extension of the 'Employee' class and set 3 parameters of 'name', 'id', and 'email' in that order as well as a 'school' parameter", () => {
             const name = "Melissa";
@@ -14,7 +16,7 @@ describe ("Intern", () => {
             expect(testIntern.school).toBe(school);
         });
     });
-
+    //Test getSchool() method
     describe("getSchool()", () => {
         it("should return the value of what was stored in the 'officeNumber' parameter", () => {
             const school = "UNC Chapel Hill"
@@ -22,6 +24,7 @@ describe ("Intern", () => {
             expect(testIntern.getSchool()).toBe(school)
         });
     });
+    //Test getRole() method
     describe("getRole()", () => {
         it("should return the value 'Intern' which was returned from the function", () => {
             const role = "Intern"
